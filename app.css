@@ -126,60 +126,110 @@ section.active {
 /* Galería */
 #galeria {
   background: #f5f5f5;
-  flex-direction: column;
   padding: 50px 20px;
   min-height: 90vh;
+  display: block; /* evita que herede el flex de section */
 }
 
 .imagenes-galeria {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(5px, 1vw, 15px);
+  column-count: 3; /* número de columnas en desktop */
+  column-gap: 15px; /* separación entre columnas */
   max-width: 1200px;
   margin: 0 auto;
-  align-items: flex-start;
 }
 
 #galeria img {
+  width: 100%;
+  margin-bottom: 15px; /* espacio entre imágenes */
   display: block;
-  width: calc(33.333% - 6.66px);
-  height: auto;
-  border-radius: 0;
+  border-radius: 5px;
   transition: transform 0.3s;
   cursor: pointer;
+  object-fit: cover; /* se recorta un poco para dar uniformidad */
 }
 
 #galeria img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-/* Horarios */
+/* Responsive */
+@media (max-width: 1024px) {
+  .imagenes-galeria {
+    column-count: 2; /* en tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .imagenes-galeria {
+    column-count: 1; /* en móviles */
+  }
+}
+
+/* Horarios elegante con verde #13332b */
 #horarios {
-  background: white;
-  padding: 40px 20px;
+  background: #f9f9f9; /* fondo claro para contraste */
+  padding: 80px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-weight: 400;
-  gap: 10px;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 40px;
+  min-height: 70vh; /* más alto */
 }
 
 #horarios h1 {
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
-  font-weight: 600;
-  margin-bottom: 15px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
   color: #13332b;
+  margin-bottom: 30px;
+  position: relative;
 }
 
-#horarios p {
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-  margin: 5px 0;
-  color: #333;
+#horarios h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #13332b; /* barra bajo el título en verde */
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* Contenedor de tarjetas de horarios en fila */
+.horario-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.horario-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1 1 250px;
+  max-width: 400px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.horario-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.horario-card i {
+  color: #13332b; /* iconos verdes */
+  font-size: 2rem;
+}
+
+.horario-card span {
+  font-size: 1.15rem;
+  color: #13332b; /* texto verde */
+  font-weight: 500;
 }
 
 /* Títulos y párrafos generales */
@@ -207,47 +257,76 @@ p {
   border-radius: 15px;
 }
 
-/* Menú */
+/* Menú - Estilo elegante */
 .menu-cards-container {
   display: flex;
   justify-content: center;
-  gap: 20px; /* ajuste de espacio */
+  gap: 25px;
   flex-wrap: wrap;
-  padding: 20px;
+  padding: 30px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.menu-card h2 {
-  margin-bottom: 10px;
-  font-size: 1.8rem;
-  color: white;
-  background-color: #13332b;
-  padding: 8px 12px;
-  text-align: left;
-  border-radius: 0;
-  word-wrap: break-word;
-}
-
 .menu-card {
   background: #fff;
-  border: 2px solid #ccc;
-  border-radius: 0;
+  border-radius: 15px; /* bordes redondeados */
+  border: 1px solid #ddd;
   padding: 20px;
   width: clamp(280px, 30%, 350px);
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
-  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
 }
 
 .menu-card:hover {
   transform: translateY(-5px);
-  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
+/* Sección dentro de la card */
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Encabezados verdes */
+.menu-card h2 {
+  margin-bottom: 12px;
+  font-size: 1.7rem;
+  color: white;
+  background-color: #13332b;
+  padding: 10px 14px;
+  text-align: left;
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+/* Imagen dentro de la sección, arriba del título */
+.menu-section-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s;
+}
+
+.menu-section-img:hover {
+  transform: scale(1.03);
+}
+
+/* Items */
 .menu-item {
   text-align: left;
   margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #eee;
 }
 
 .item-name {
@@ -316,7 +395,7 @@ p {
 }
 
 .social-icon:hover {
-  color: #ff6f61;
+  color: #13332b;
   transform: scale(1.35);
 }
 
